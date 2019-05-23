@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>Book Search</title>
+  </head>
+  <body>
+    <a href="https://cs-260-projects-minnoch-redux.firebaseapp.com">Firebase</a>
+    <h1 class="titleSection">Midterm Project - Library Search</h1>
+    <div id='app'>
+    <form>
+    <label>Enter a book title:</label>
+    <input v-model="bookInput" type="text"></input>
+    <input v-on:submit.prevent="bookSubmit" type="submit" value="Submit"></input>
+    </form>
+    <div v-if="loading">
+    <p>Loading...</p>
+    </div>
+    <div v-else>
+    <div class="results">
+            <p>{{ current.title }}</p><button>Favorite</button></div>
+    </div>
+    <div class="favorites">
+        <button>Unfavorite</button>
+    </div>
+</div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <a class="footer" href=https://github.com/byu-cs-260-spring-2019/midterm-1-jarenm>GitHub</a>
+  </body>
+</html>
