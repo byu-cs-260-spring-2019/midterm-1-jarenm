@@ -6,29 +6,36 @@ let app = new Vue({
         alt: '',
         loading: true,
         results: {},
-        favorites: {},
-        info: null
+        url: '',
+        number: '',
+        bookInput: '',
+        item: '',
+        favorites: []
     },
     methods: {
-        async bookInput() {
+        async bookCall() {
             try {
                 this.loading = true;
-                const response = await axios.get('http://openlibrary.org/search.json?q=' + this.title);
-                this.current = response.data;
+                const response = await axios.get('http://openlibrary.org/search.json?q=' + this.bookInput);
+                this.results = response.data;
+                let currISBN = this.results.docs[0].isbn[0];
+                this.url = "http://covers.openlibrary.org/b/isbn/" + currISBN + "-M.jpg";
                 this.loading = false;
-                this.title = response.data.title;
+                console.log(this.results);
             } catch (error) {
                 console.log(error);
             }
         },
-        bookSubmit() {
-            this.title = bookInput;
+        favorite(item) {
+            if(!(this.favorites.includes(this.results.docs[0].title))) {
+                this.favorites.push({"title": this.results.docs[0].title});
+            }
+            console.log(this.favorites);
         },
-        AddToFavorites() {
-            this.favorites.push[this.title];
-        },
-        RemoveFromFavorites() {
-            this.favorites.pop[this.title];
+        unfavorite(item) {
+            var index = this.favorites.indexOf(item);
+            if (index > -1)
+              this.favorites.splice(index,1);
         }
     },
 

@@ -8,30 +8,38 @@
     <title>Book Search</title>
   </head>
   <body>
-    <a href="https://cs-260-projects-minnoch-redux.firebaseapp.com">Firebase</a>
+        <a class="header" href="https://cs-260-projects-minnoch-redux.firebaseapp.com">Firebase</a>
     <h1 class="titleSection">Midterm Project - Library Search</h1>
-    <div id='app'>
-    <form>
-    <label>Enter a book title:</label>
-    <input v-model="bookInput" type="text"></input>
-    <input v-on:submit.prevent="bookSubmit" type="submit" value="Submit"></input>
+<div id='app'>
+    <form v-on:submit.prevent="bookCall">
+        <label>Enter a book title:
+        <input v-model="bookInput" type="text"></input>
+        <input type="Submit"></input>
+        </label>
     </form>
     <div v-if="loading">
-    <p>Loading...</p>
+        <p>Awaiting a title...</p>
     </div>
     <div v-else>
-    <div class="results">
-            <p>{{ current.title }}</p><button>Favorite</button></div>
+        <div id="bookResults">
+            <p>Title: {{ results.docs[0].title }}</p>
+            <p>  Author: {{ results.docs[0].author_name[0] }}</p>    
+            <p>  Published: {{results.docs[0].first_publish_year }}</p>
+            <img v-bind:src="url" id="bookCover">
+            <button v-on:click="favorite(item)">Favorite</button>
+        </div>
     </div>
-    <div class="favorites">
-        <button>Unfavorite</button>
+    <h2>Favorite books:</h2>
+    <div v-for="item in favorites" class="favSection">
+        <p>{{item.title}}</p>
+        <button v-on:click="unfavorite(item)">Unfavorite</button>
     </div>
-</div>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <a class="footer" href=https://github.com/byu-cs-260-spring-2019/midterm-1-jarenm>GitHub</a>
+    <a class="footer" href=https://github.com/byu-cs-260-spring-2019/midterm-1-jarenm>GitHub</a></br>
   </body>
 </html>
